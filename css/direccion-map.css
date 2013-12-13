@@ -1,0 +1,29 @@
+form#direccionmap-configuracion{
+	width: 48%;
+	min-width: 450px;
+}
+#map_canvas{
+	width: 50%;
+	min-width: 450px;
+	height: 500px;
+	border: 1px solid #CCC;
+	background-color: #E5E3DF;
+	overflow: hidden;
+	position: absolute;
+	margin-left: 50%;
+}
+/*.btn-map {
+	float: right;
+	top: -70px;
+	position: relative;
+	right: 85px;
+}*/
+#map_contact .gm-style img {
+	max-width: none;
+}
+#map_contact {
+	height: 250px;
+	width: 100%;
+	margin: 0 auto;
+	border: 3px solid #CCC;
+}

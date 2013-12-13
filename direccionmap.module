@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Dirección Mapa
+ */
+
+/**
+ * Implements hook_help().
+ */
+function direccionmap_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#direccionmap':
+      return '<p>' . t('Dirección Mapa Muestra una Dirección en un Mapa de Google Maps.')
+         . '</p>';
+  }
+  return '';
+}
+
+/**
+ * Implements hook_menu().
+ */
+function direccionmap_menu(){
+
+	$items['admin/direccion-mapa'] = array(
+		'title' => t('Dirección Mapa'),
+		'description' => t('Configurar la dirección.'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('direccionmap_configuracion'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 'direccionmap.admin.inc',
+		'weight' => -2,
+	);
+
+	return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function direccionmap_permission() {
+  return array(
+    'administer direccionmap' => array(
+      'title' => t('Administrador Dirección Mapa'),
+      'description' => t('Modifica la dirección y cambia la configuración de Dirección Mapa.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function direccionmap_block_info() {
+  $blocks['direccion_map'] = array(
+    'info' => t('Bloque para Direción Mapa'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implementa hook_block_view().
+ */
+function direccionmap_block_view($delta = '') {
+  switch ($delta) {
+    case 'direccion_map':
+      $block['content'] = direccionmap_direccion();
+      return $block;
+  }
+  break;
+}
+
+/**
+ * Implementa hook_theme().
+ */
+function direccionmap_theme() {
+  return array(
+    'direccionmap_direccion' => array(
+      'template' => 'direccion-map',
+    ),
+  );
+}
+
+function direccionmap_direccion() {
+  $variables = array(
+    'direccion' => variable_get('direccionmap_direccion', ''),
+	'descripcion' => variable_get('direccionmap_descripcion', t('Oficinas')),
+	'zoom' => variable_get('direccionmap_zoom', '15'),
+	'width' => variable_get('direccionmap_width', '100%'),
+	'height' => variable_get('direccionmap_height', '250px'),
+	'latitud' => variable_get('direccionmap_latitud', '-2.1328'),
+	'longitud' => variable_get('direccionmap_longitud', '-79.9058'),
+  );
+  return theme('direccionmap_direccion', $variables);
+}
