@@ -3,7 +3,7 @@ form#direccionmap-configuracion{
 	min-width: 450px;
 }
 #map_canvas{
-	width: 50%;
+	width: 46%;
 	min-width: 450px;
 	height: 500px;
 	border: 1px solid #CCC;
