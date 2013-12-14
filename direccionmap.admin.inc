@@ -10,15 +10,18 @@
 function direccionmap_configuracion() {
   $lib_url = 'http://maps.google.com/maps/api/js?sensor=false';
   drupal_add_js($lib_url, 'external');
+  drupal_add_js(array('direccionmap' => array(
+		'latitud' => variable_get('direccionmap_latitud', '-2.1328'),
+		'longitud' => variable_get('direccionmap_longitud', '-79.9058'),
+  )), 'setting');
   drupal_add_js(drupal_get_path('module', 'direccionmap') .'/js/direccion-map-admin.js');
   drupal_add_css(drupal_get_path('module', 'direccionmap') .'/css/direccion-map.css');
-  
+		
   $form['info'] = array(
     '#type' => 'fieldset',
     '#title' => 'Informaci&oacute;n',
     '#collapsible' => FALSE,
 	'#prefix' => '<div id="map_canvas"></div>',
-	'#suffix' => '<script>(function ($){$(document).ready(function(){cargar_gmap("'.variable_get('direccionmap_latitud', '-2.1328').'", "'.variable_get('direccionmap_longitud', '-79.9058').'");});})(jQuery);</script>',
   ); 
   $form['info']['direccionmap_direccion'] = array(
     '#title' => 'Direcci&oacute;n',  

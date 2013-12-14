@@ -108,5 +108,7 @@ $(document).ready(function(){
 		geocodePosition();
 		return false;
 	});
+	
+	cargar_gmap(Drupal.settings.direccionmap.latitud, Drupal.settings.direccionmap.longitud);
 });
 })(jQuery);

@@ -19,7 +19,7 @@ Funcion para crear el mapa
 ****************************************/
 function cargar_gmap(latitud, longitud,descripcion,zoom){
     var myOptions = {
-      zoom: zoom,
+      zoom: parseInt(zoom),
       center: new google.maps.LatLng(latitud,longitud),
       mapTypeControl: true,
       streetViewControl: false,
@@ -57,3 +57,8 @@ function crearPunto(latitud,longitud){
 	});
 	return marker;
 }
+(function ($) {
+    $(document).ready(function(){
+      cargar_gmap(Drupal.settings.direccionmap.latitud, Drupal.settings.direccionmap.longitud, Drupal.settings.direccionmap.descripcion, Drupal.settings.direccionmap.zoom);
+    });
+})(jQuery);
